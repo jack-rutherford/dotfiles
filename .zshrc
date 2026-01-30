@@ -13,6 +13,11 @@ alias kgp='kubectl get pods'
 alias kgpa='kubectl get pods -A'
 alias kgpw='kubectl get pods -o wide'
 alias kgpwch='kubectl get pods --watch -o wide'
+alias kall='kubectl apply -f'
+alias kdel='kubectl delete -f'
+alias kroll='kubectl rollout'
+alias krep='kubectl replace -f'
+alias kex='kubectl exec -it'
 kdp() {
   local line
   line=$(kgpa | fzf --preview="kubectl describe pod {2} -n {1}")
