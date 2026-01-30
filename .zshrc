@@ -13,10 +13,10 @@ alias kgp='kubectl get pods'
 alias kgpa='kubectl get pods -A'
 alias kgpw='kubectl get pods -o wide'
 alias kgpwch='kubectl get pods --watch -o wide'
-alias kall='kubectl apply -f'
+alias kap='kubectl apply -f'
 alias kdel='kubectl delete -f'
-alias kroll='kubectl rollout'
 alias krep='kubectl replace -f'
+alias kroll='kubectl rollout'
 alias kex='kubectl exec -it'
 kdp() {
   local line
