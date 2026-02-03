@@ -126,6 +126,10 @@ else
     echo "✅ zsh is already the default shell"
 fi
 
+# Install Caskaydia Cove Nerd Font
+echo "📝 Installing Caskaydia Cove Nerd Font..."
+brew install --cask font-caskaydia-cove-nerd-font
+
 # Create repos directory for oprj/oprjt functions
 mkdir -p "$HOME/repos"
 
@@ -133,10 +137,11 @@ mkdir -p "$HOME/repos"
 echo ""
 echo "📝 Post-installation notes:"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "1. ☁️ Configure AWS CLI with 'aws configure sso' if you use AWS"
-echo "2. ⚙️ Configure kubectl contexts for Kubernetes access"
-echo "3. 📂 Copy your .zshrc to ~/.zshrc (if not already done)"
-echo "4. 🔄 Restart your terminal or run: source ~/.zshrc"
+echo "1. 💻 Configure terminal to use nerd font: cmd+, > profiles > text > Font > CaskaydiaCove Nerd Font Mono SemiBold 12"
+echo "2. ☁️ Configure AWS CLI with 'aws configure sso' if you use AWS"
+echo "3. ⚙️ Configure kubectl contexts for Kubernetes access"
+echo "4. 📂 Copy your .zshrc to ~/.zshrc (if not already done)"
+echo "5. 🔄 Restart your terminal or run: source ~/.zshrc"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 echo "✨ Bootstrap installation complete!"
