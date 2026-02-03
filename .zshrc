@@ -24,7 +24,6 @@ kdp() {
   [[ -n "$line" ]] && kubectl describe pod $(echo "$line" | awk '{print $2}') -n $(echo "$line" | awk '{print $1}')
 }
 alias kgl='kubectl get logs'
-# alias kpl="kubectl get namespace -o name | awk -F '\/' '{print $2}' | fzf | xargs -I {} kubectl get pods -o name --namespace {} | fzf | xargs -I {} kubectl logs {}"
 kpl() {
   local namespace
   local pod
@@ -37,6 +36,7 @@ alias kgd='kubectl get deployments'
 alias kgn='kubectl get nodes'
 alias kgctx='kubectl config get-contexts'
 alias kctx='kubectl config use-context'
+alias kgns='kubectl get namespaces'
 alias kns='kubectl config set-context --current --namespace'
 
 # Git aliases and functions
@@ -125,12 +125,12 @@ alias ll='eza -lah --icons'
 alias la='eza -a --icons'
 
 # Terraform aliases
-alias tf='terraform'
-alias tfp='terraform plan'
-alias tfa='terraform apply'
-alias tfi='terraform init'
 alias tff='terraform fmt -recursive'
-alias tfs='terraform show'
+alias tf='tff && terraform'
+alias tfp='tf plan'
+alias tfa='tf apply'
+alias tfi='tf init'
+alias tfs='tf show'
 
 # Add local bin and conda to PATH
 export PATH="$HOME/.local/bin:$PATH"
