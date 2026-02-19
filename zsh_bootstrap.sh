@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
-
-echo "🚀 Starting bootstrap installation..."
+echo "Starting bootstrap installation..."
 
 OS="$(uname -s)"
 case "${OS}" in
@@ -15,7 +13,7 @@ echo "📱 Detected OS: $MACHINE"
 
 # Install Homebrew (if on macOS or Linux)
 if ! command -v brew &> /dev/null; then
-    echo "🍺 Installing Homebrew..."
+    echo "Installing Homebrew..."
     if [[ "$MACHINE" == "Mac" ]]; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     elif [[ "$MACHINE" == "Linux" ]]; then
@@ -25,13 +23,13 @@ if ! command -v brew &> /dev/null; then
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     fi
 else
-    echo "✅ Homebrew already installed"
+    echo "Homebrew already installed"
 fi
 
-echo "🔄 Updating Homebrew..."
+echo "Updating Homebrew..."
 brew update
 
-echo "📦 Installing core packages..."
+echo "Installing core packages..."
 
 brew install git
 brew install fzf
@@ -43,8 +41,9 @@ brew install terraform
 brew install awscli
 brew install jandedobbeleer/oh-my-posh/oh-my-posh
 brew install zsh-autosuggestions
+brew install zsh-syntax-highlighting
 
-echo "🐍 Installing pyenv..."
+echo "Installing pyenv..."
 if [[ ! -d "$HOME/.pyenv" ]]; then
     brew install pyenv
     
@@ -56,11 +55,11 @@ if [[ ! -d "$HOME/.pyenv" ]]; then
         echo "For Ubuntu/Debian: sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev"
     fi
 else
-    echo "✅ pyenv already installed"
+    echo "pyenv already installed"
 fi
 
 # Install nvm (Node Version Manager)
-echo "📗 Installing nvm..."
+echo "Installing nvm..."
 if [[ ! -d "$HOME/.nvm" ]]; then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
     
@@ -68,11 +67,11 @@ if [[ ! -d "$HOME/.nvm" ]]; then
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 else
-    echo "✅ nvm already installed"
+    echo "nvm already installed"
 fi
 
 # Install VS Code (if not already installed)
-echo "💻 Installing Visual Studio Code..."
+echo "Installing Visual Studio Code..."
 if ! command -v code &> /dev/null; then
     if [[ "$MACHINE" == "Mac" ]]; then
         brew install --cask visual-studio-code
@@ -80,11 +79,11 @@ if ! command -v code &> /dev/null; then
         brew install --cask visual-studio-code || echo "⚠️  VS Code installation via brew failed. Install manually from https://code.visualstudio.com/"
     fi
 else
-    echo "✅ VS Code already installed"
+    echo "VS Code already installed"
 fi
 
 # Create oh-my-posh themes directory
-echo "🎨 Setting up oh-my-posh theme directory..."
+echo "Setting up oh-my-posh theme directory..."
 mkdir -p "$HOME/.oh-my-posh/themes"
 
 # Download a default oh-my-posh theme (you'll need to add your custom kushal.omp.json)
@@ -97,40 +96,40 @@ curl -sL https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/
 mkdir -p "$HOME/.local/bin"
 
 # Install a default Python version with pyenv
-echo "🐍 Installing Python 3.11 via pyenv..."
+echo "Installing Python 3.11 via pyenv..."
 if command -v pyenv &> /dev/null; then
     if ! pyenv versions | grep -q "3.11"; then
         pyenv install 3.11
         pyenv global 3.11
     else
-        echo "✅ Python 3.11 already installed"
+        echo "Python 3.11 already installed"
     fi
 fi
 
 # Install a default Node version with nvm
-echo "📗 Installing Node LTS via nvm..."
+echo "Installing Node LTS via nvm..."
 if [[ -d "$HOME/.nvm" ]]; then
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     nvm install --lts
     nvm use --lts
-    echo "✅ Node LTS installed"
+    echo "Node LTS installed"
 fi
 
 # Setup zsh as default shell (if not already)
 if [[ "$SHELL" != *"zsh"* ]]; then
-    echo "🐚 Setting zsh as default shell..."
+    echo "Setting zsh as default shell..."
     if [[ "$MACHINE" == "Mac" ]]; then
         chsh -s "$(which zsh)"
     elif [[ "$MACHINE" == "Linux" ]]; then
         sudo chsh -s "$(which zsh)" "$USER" || echo "⚠️  Could not set zsh as default. Run manually: chsh -s \$(which zsh)"
     fi
 else
-    echo "✅ zsh is already the default shell"
+    echo "zsh is already the default shell"
 fi
 
 # Install Caskaydia Cove Nerd Font
-echo "📝 Installing Caskaydia Cove Nerd Font..."
+echo "Installing Caskaydia Cove Nerd Font..."
 brew install --cask font-caskaydia-cove-nerd-font
 
 # Create repos directory for oprj/oprjt functions
@@ -138,14 +137,15 @@ mkdir -p "$HOME/repos"
 
 # AWS SSO setup reminder
 echo ""
-echo "📝 Post-installation notes:"
+echo "Post-installation notes:"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "1. 💻 Configure terminal to use nerd font: cmd+, > profiles > text > Font > CaskaydiaCove Nerd Font Mono SemiBold 12"
-echo "2. ☁️ Configure AWS CLI with 'aws configure sso' if you use AWS"
-echo "3. ⚙️ Configure kubectl contexts for Kubernetes access"
-echo "4. 📂 Copy your .zshrc to ~/.zshrc (if not already done)"
-echo "5. 🔄 Restart your terminal or run: source ~/.zshrc"
+echo "1. Configure terminal to use nerd font: cmd+, > profiles > text > Font > CaskaydiaCove Nerd Font Mono SemiBold 12"
+echo "2. Configure AWS CLI with 'aws configure sso' if you use AWS"
+echo "3. Configure kubectl contexts for Kubernetes access"
+echo "4. Copy your .zshrc to ~/.zshrc (if not already done)"
+echo "5. Restart your terminal or run: source ~/.zshrc"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
-echo "✨ Bootstrap installation complete!"
-echo "🎉 Your development environment is ready!"
+echo "Bootstrap installation complete!"
+echo "Your development environment is ready!"
+
