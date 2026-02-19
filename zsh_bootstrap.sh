@@ -88,7 +88,10 @@ echo "🎨 Setting up oh-my-posh theme directory..."
 mkdir -p "$HOME/.oh-my-posh/themes"
 
 # Download a default oh-my-posh theme (you'll need to add your custom kushal.omp.json)
-curl -sL https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/main/themes/kushal.omp.json -o "$HOME/.oh-my-posh/themes/kushal.omp.json"
+DEST="$HOME/.oh-my-posh/themes/kushal.omp.json"
+
+[ -f "$DEST" ] || \
+curl -sL https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/main/themes/kushal.omp.json -o "$DEST"
 
 # Create local bin directory
 mkdir -p "$HOME/.local/bin"
