@@ -9,9 +9,8 @@ case "${OS}" in
     *)          MACHINE="UNKNOWN:${OS}"
 esac
 
-echo "📱 Detected OS: $MACHINE"
+echo "Detected OS: $MACHINE"
 
-# Install Homebrew (if on macOS or Linux)
 if ! command -v brew &> /dev/null; then
     echo "Installing Homebrew..."
     if [[ "$MACHINE" == "Mac" ]]; then
@@ -29,6 +28,7 @@ fi
 echo "Updating Homebrew..."
 brew update
 
+# Brew for core packages (non-python/node tools)
 echo "Installing core packages..."
 
 brew install git
@@ -58,7 +58,6 @@ else
     echo "pyenv already installed"
 fi
 
-# Install nvm (Node Version Manager)
 echo "Installing nvm..."
 if [[ ! -d "$HOME/.nvm" ]]; then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -70,7 +69,6 @@ else
     echo "nvm already installed"
 fi
 
-# Install VS Code (if not already installed)
 echo "Installing Visual Studio Code..."
 if ! command -v code &> /dev/null; then
     if [[ "$MACHINE" == "Mac" ]]; then
@@ -82,7 +80,6 @@ else
     echo "VS Code already installed"
 fi
 
-# Create oh-my-posh themes directory
 echo "Setting up oh-my-posh theme directory..."
 mkdir -p "$HOME/.oh-my-posh/themes"
 
@@ -95,7 +92,6 @@ curl -sL https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/
 # Create local bin directory
 mkdir -p "$HOME/.local/bin"
 
-# Install a default Python version with pyenv
 echo "Installing Python 3.11 via pyenv..."
 if command -v pyenv &> /dev/null; then
     if ! pyenv versions | grep -q "3.11"; then
@@ -106,7 +102,6 @@ if command -v pyenv &> /dev/null; then
     fi
 fi
 
-# Install a default Node version with nvm
 echo "Installing Node LTS via nvm..."
 if [[ -d "$HOME/.nvm" ]]; then
     export NVM_DIR="$HOME/.nvm"
@@ -116,7 +111,38 @@ if [[ -d "$HOME/.nvm" ]]; then
     echo "Node LTS installed"
 fi
 
-# Setup zsh as default shell (if not already)
+echo "Installing Miniconda..."
+if [[ ! -d "$HOME/miniconda3" ]]; then
+    if [[ "$MACHINE" == "Mac" ]]; then
+        curl -fsSL https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-$(uname -m).sh -o miniconda.sh
+    elif [[ "$MACHINE" == "Linux" ]]; then
+        curl -fsSL https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-$(uname -m).sh -o miniconda.sh
+    fi
+
+    bash miniconda.sh -b -p "$HOME/miniconda3"
+    rm miniconda.sh
+
+    # Initialize for zsh
+    "$HOME/miniconda3/bin/conda" init zsh
+else
+    echo "Miniconda already installed"
+fi
+
+# pipx for global Python tools
+echo "Installing pipx..."
+if ! command -v pipx &> /dev/null; then
+    brew install pipx
+    pipx ensurepath
+fi
+
+echo "Installing Poetry..."
+if ! command -v poetry &> /dev/null; then
+    pipx install poetry
+else
+    echo "Poetry already installed"
+fi
+
+# Setup zsh as default shell
 if [[ "$SHELL" != *"zsh"* ]]; then
     echo "Setting zsh as default shell..."
     if [[ "$MACHINE" == "Mac" ]]; then
@@ -128,7 +154,6 @@ else
     echo "zsh is already the default shell"
 fi
 
-# Install Caskaydia Cove Nerd Font
 echo "Installing Caskaydia Cove Nerd Font..."
 brew install --cask font-caskaydia-cove-nerd-font
 
