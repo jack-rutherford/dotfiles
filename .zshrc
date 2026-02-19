@@ -41,9 +41,7 @@ alias kns='kubectl config set-context --current --namespace'
 
 # Git aliases and functions
 alias s='git status -sb'
-
 alias ga='git add -A'
-
 alias gbr='git branch -v'
 
 gc() {
@@ -53,7 +51,6 @@ gc() {
 }
 
 alias gcm='git commit -v --amend'
-
 alias gco='git checkout'
 
 alias gd='git diff -M'
@@ -139,6 +136,7 @@ export PATH="/opt/conda/bin:$PATH"
 # Shell enhancements and customizations
 eval "$(oh-my-posh init zsh --config ~/.oh-my-posh/themes/kushal.omp.json)"
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Enable searching through command history with up/down arrows
 autoload -U up-line-or-beginning-search
