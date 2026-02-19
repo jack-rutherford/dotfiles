@@ -1,6 +1,6 @@
 # Development Environment Bootstrap
 
-This bootstrap script installs all dependencies required for the `.zshrc` configuration.
+This bootstrap script installs all dependencies required for the `.zshrc` configuration and sets up a clean development environment for macOS and Linux.
 
 ## Quick Start
 
@@ -13,16 +13,19 @@ chmod +x bootstrap.sh
 
 ### Package Managers
 - **Homebrew** - Package manager for macOS/Linux
+- **pyenv** - Python version management
+- **nvm** - Node.js version management
+- **Miniconda** - Python environment manager (`conda`) installed under `$HOME/miniconda3`
+- **pipx** - Isolated Python CLI tool manager
 
 ### Shell Enhancements
 - **oh-my-posh** - Shell prompt customization
 - **zsh-autosuggestions** - Fish-like autosuggestions for zsh
+- **zsh-syntax-highlighting** - Syntax highlighting in zsh
 - **fzf** - Fuzzy finder for command-line
 
 ### Development Tools
 - **Git** - Version control
-- **pyenv** - Python version management
-- **nvm** - Node.js version management
 - **Visual Studio Code** - Code editor
 
 ### Kubernetes Tools
@@ -36,6 +39,31 @@ chmod +x bootstrap.sh
 ### Utilities
 - **eza** - Modern replacement for `ls`
 - **tree** - Directory tree viewer
+- **Caskaydia Cove Nerd Font** - For terminal customization
+
+### Python & Node CLI Tools
+- **Poetry** - Python project and dependency manager (installed via `pipx`)
+- **Black, Ruff, httpie** (optional) - Python CLI tools via `pipx`
+
+---
+
+## Directory Structure Created
+
+```
+~/
+├── .pyenv/                 # Python version manager
+├── .nvm/                   # Node version manager
+├── miniforge3/ or minconda3 # Conda installation
+├── .oh-my-posh/           
+│   └── themes/
+│       └── kushal.omp.json # Custom theme
+├── .local/
+│   └── bin/               # Local binaries
+├── repos/                 # Projects directory (for oprj function)
+└── .zshrc                 # Your shell configuration
+```
+
+---
 
 ## Manual Steps After Installation
 
@@ -48,7 +76,6 @@ source ~/.zshrc
 ### 2. Set Up oh-my-posh Theme
 Replace the default theme with your custom one:
 ```bash
-# Copy your custom theme
 cp /path/to/kushal.omp.json ~/.oh-my-posh/themes/kushal.omp.json
 ```
 
@@ -60,23 +87,36 @@ aws configure sso
 
 ### 4. Configure Kubernetes Contexts
 ```bash
-# Add your kubeconfig
 kubectl config use-context <your-context>
 ```
 
 ### 5. Install Python Version
 ```bash
-# Install your preferred Python version
+# Install your preferred Python version via pyenv
 pyenv install 3.12.0
 pyenv global 3.12.0
 ```
 
 ### 6. Install Node.js Version
 ```bash
-# Install your preferred Node version
 nvm install 20
 nvm use 20
 ```
+
+### 7. Initialize Conda
+```bash
+# Disable auto-activation of base environment
+conda config --set auto_activate_base false
+```
+
+### 8. Install Python CLI Tools via pipx
+```bash
+# Example: Poetry
+pipx install poetry
+pipx ensurepath
+```
+
+---
 
 ## Troubleshooting
 
@@ -98,48 +138,19 @@ sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel
 ```
 
 ### Homebrew on Linux
-If Homebrew installation fails, make sure you have the prerequisites:
+If Homebrew installation fails, ensure prerequisites:
 ```bash
 sudo apt-get install build-essential procps curl file git
 ```
 
-### zsh-autosuggestions Not Working
-Make sure the Homebrew path is correct in your .zshrc. The script uses:
-```bash
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-```
-
 ### VS Code 'code' Command Not Available
-On macOS, open VS Code and run:
+On macOS:
+- Open VS Code
 - Press `Cmd+Shift+P`
 - Type "Shell Command: Install 'code' command in PATH"
 - Press Enter
 
-## Directory Structure Created
-
-```
-~/
-├── .pyenv/                 # Python version manager
-├── .nvm/                   # Node version manager
-├── .oh-my-posh/           
-│   └── themes/
-│       └── kushal.omp.json # Custom theme
-├── .local/
-│   └── bin/               # Local binaries
-├── repos/                 # Projects directory (for oprj function)
-└── .zshrc                 # Your shell configuration
-```
-
-## Customization
-
-### Adding More Tools
-Edit `bootstrap.sh` and add:
-```bash
-brew install <package-name>
-```
-
-### Oh-My-Posh Themes
-Browse available themes at: https://ohmyposh.dev/docs/themes
+---
 
 ## Features Enabled by .zshrc
 
@@ -160,10 +171,43 @@ Browse available themes at: https://ohmyposh.dev/docs/themes
 - `awssso()` - AWS SSO login helper
 - History search with arrow keys
 
+---
+
+## Customization
+
+### Adding More Tools
+Edit `bootstrap.sh` and add:
+```bash
+brew install <package-name>
+```
+or for Python CLI tools:
+```bash
+pipx install <tool>
+```
+
+### Oh-My-Posh Themes
+Browse available themes at: [oh-my-posh themes](https://ohmyposh.dev/docs/themes)
+
+---
+
+## Recommended Tool Ownership
+
+| Tool        | Owner       | Notes |
+|------------|------------|------|
+| Homebrew   | System-level | Non-Python binaries and utilities |
+| pyenv      | Python versions | Project Python management |
+| pipx       | Python CLI tools | Isolated per tool, survives Python upgrades |
+| Conda      | Python environments | Data science / ML isolation |
+| Node/npm   | nvm        | Node.js version management |
+
+---
+
 ## Support
 
 For issues with specific tools:
 - Homebrew: https://docs.brew.sh/
 - pyenv: https://github.com/pyenv/pyenv
 - nvm: https://github.com/nvm-sh/nvm
+- pipx: https://pypa.github.io/pipx/
+- Miniconda: https://docs.conda.io/en/latest/miniconda.html
 - oh-my-posh: https://ohmyposh.dev/
