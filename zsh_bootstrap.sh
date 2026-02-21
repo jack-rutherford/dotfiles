@@ -160,6 +160,15 @@ brew install --cask font-caskaydia-cove-nerd-font
 # Create repos directory for oprj/oprjt functions
 mkdir -p "$HOME/repos"
 
+mv .zshrc "$HOME/.zshrc"
+mv swft-vscode/ "$HOME/.vscode/extensions/"
+
+# Replace hardcoded paths in vscode settings and move to correct location
+sed -i '' "s|/Users/jruth/|$HOME/|g" vscode_settings.json
+mv vscode_settings.json "$HOME/Library/Application Support/Code/User/settings.json"
+
+source "$HOME/.zshrc"
+
 # AWS SSO setup reminder
 echo ""
 echo "Post-installation notes:"

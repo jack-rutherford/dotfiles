@@ -11,16 +11,13 @@
         "**/.github/workflows/*.{yml,yaml}": "yaml",
         "**/Taskfile.{yml,yaml}": "yaml"
     },
-    "aws.cloudformation.telemetry.enabled": false,
     "azureTerraform.survey": {
         "surveyPromptDate": "never",
         "surveyPromptIgnoredCount": 0
     },
-    "aws.telemetry": false,
     "github.copilot.nextEditSuggestions.enabled": false,
     "explorer.confirmDragAndDrop": false,
     "gitlens.ai.model": "vscode",
-    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
     "cSpell.userWords": [
     ],
     "diffEditor.ignoreTrimWhitespace": false,
@@ -31,5 +28,5 @@
     "vs-kubernetes": {
         "vscode-kubernetes.minikube-path-mac": "/Users/jruth/.vs-kubernetes/tools/minikube/darwin-arm64/minikube"
     },
-    "chat.editing.confirmEditRequestRemoval": false,
+    "chat.editing.confirmEditRequestRemoval": false
 }

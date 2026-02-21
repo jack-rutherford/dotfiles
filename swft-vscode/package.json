@@ -1,0 +1,48 @@
+{
+  "name": "swft-vscode",
+  "displayName": "swft_vscode",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.109.0"
+  },
+  "categories": [
+    "Extension Packs"
+  ],
+  "extensionPack": [ 
+    "4ops.terraform", 
+    "alefragnani.project-manager", 
+    "codezombiech.gitignore", 
+    "davidanson.vscode-markdownlint", 
+    "donjayamanne.git-extension-pack", 
+    "donjayamanne.githistory", 
+    "eamodio.gitlens", 
+    "foxundermoon.shell-format", 
+    "github.copilot-chat", 
+    "github.vscode-github-actions", 
+    "hashicorp.terraform", 
+    "mariusschulz.yarn-lock-syntax", 
+    "me-dutour-mathieu.vscode-github-actions", 
+    "michelemelluso.gitignore", 
+    "ms-azuretools.vscode-azureterraform", 
+    "ms-azuretools.vscode-containers", 
+    "ms-azuretools.vscode-docker", 
+    "ms-kubernetes-tools.vscode-kubernetes-tools", 
+    "ms-python.debugpy", 
+    "ms-python.python", 
+    "ms-python.vscode-pylance", 
+    "ms-python.vscode-python-envs", 
+    "ms-vscode-remote.remote-containers", 
+    "ms-vscode-remote.remote-wsl", 
+    "ms-vscode.makefile-tools", 
+    "oderwat.indent-rainbow", 
+    "redhat.vscode-yaml", 
+    "ritwickdey.liveserver", 
+    "streetsidesoftware.code-spell-checker", 
+    "tamasfe.even-better-toml", 
+    "youngjuning.yarn-lock-preview", 
+    "zeshuaro.vscode-python-poetry", 
+    "zhuangtongfa.material-theme", 
+    "ziyasal.vscode-open-in-github"
+  ]
+}
