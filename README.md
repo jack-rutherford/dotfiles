@@ -28,6 +28,10 @@ chmod +x bootstrap.sh
 - **Git** - Version control
 - **Visual Studio Code** - Code editor
 
+### VS Code Configuration
+- **VS Code Extension Pack** - Custom extension pack located in `swft-vscode/`
+- **VS Code User Settings** - Preconfigured `vscode_settings.json` automatically applied to your local VS Code profile
+
 ### Kubernetes Tools
 - **kubectl** - Kubernetes CLI
 - **kubecolor** - Colorized kubectl output
@@ -53,7 +57,7 @@ chmod +x bootstrap.sh
 ~/
 ├── .pyenv/                 # Python version manager
 ├── .nvm/                   # Node version manager
-├── miniforge3/ or minconda3 # Conda installation
+├── miniconda3/             # Conda installation
 ├── .oh-my-posh/           
 │   └── themes/
 │       └── kushal.omp.json # Custom theme
@@ -62,6 +66,39 @@ chmod +x bootstrap.sh
 ├── repos/                 # Projects directory (for oprj function)
 └── .zshrc                 # Your shell configuration
 ```
+
+---
+
+## VS Code Setup Details
+
+### Extension Pack
+
+The bootstrap script installs a local VS Code extension pack by copying:
+
+```
+swft-vscode/ → ~/.vscode/extensions/
+```
+
+This ensures your preferred extensions are available immediately after installation.
+
+### User Settings
+
+The script:
+
+1. Replaces any hardcoded `/Users/<name>/` paths with your current `$HOME`
+2. Moves `vscode_settings.json` to:
+
+**macOS:**
+```
+~/Library/Application Support/Code/User/settings.json
+```
+
+**Linux:**
+```
+~/.config/Code/User/settings.json
+```
+
+This applies your predefined editor configuration automatically.
 
 ---
 
