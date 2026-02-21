@@ -130,8 +130,11 @@ alias tfi='tf init'
 alias tfs='tf show'
 
 # Add local bin and conda to PATH
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="/opt/conda/bin:$PATH"
+export DOT_LOCAL_DIR="$HOME/.local"
+[[ -d $DOT_LOCAL_DIR/bin ]] && export PATH="$DOT_LOCAL_DIR/bin:$PATH"
+
+export CONDA_DIR="/opt/conda"
+[[ -d $CONDA_DIR/bin ]] && export PATH="$CONDA_DIR/bin:$PATH"
 
 # Shell enhancements and customizations
 eval "$(oh-my-posh init zsh --config ~/.oh-my-posh/themes/kushal.omp.json)"
