@@ -1,0 +1,35 @@
+{
+    "workbench.sideBar.location": "right",
+    "workbench.colorTheme": "One Dark Pro Night Flat",
+    "files.autoSave": "afterDelay",
+    "git.autofetch": true,
+    "editor.tabSize": 2,
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "explorer.confirmDelete": false,
+    "files.associations": {
+        "**/.github/workflows/*.{yml,yaml}": "yaml",
+        "**/Taskfile.{yml,yaml}": "yaml"
+    },
+    "aws.cloudformation.telemetry.enabled": false,
+    "azureTerraform.survey": {
+        "surveyPromptDate": "never",
+        "surveyPromptIgnoredCount": 0
+    },
+    "aws.telemetry": false,
+    "github.copilot.nextEditSuggestions.enabled": false,
+    "explorer.confirmDragAndDrop": false,
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+    "cSpell.userWords": [
+    ],
+    "diffEditor.ignoreTrimWhitespace": false,
+    "makefile.configureOnOpen": false,
+    "editor.fontFamily": "CaskaydiaCove Nerd Font Mono, Menlo, Monaco, 'Courier New', monospace",
+    "terminal.integrated.initialHint": false,
+    "chat.viewSessions.orientation": "stacked",
+    "vs-kubernetes": {
+        "vscode-kubernetes.minikube-path-mac": "/Users/jruth/.vs-kubernetes/tools/minikube/darwin-arm64/minikube"
+    },
+    "chat.editing.confirmEditRequestRemoval": false,
+}
