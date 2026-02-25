@@ -121,9 +121,6 @@ if [[ ! -d "$HOME/miniconda3" ]]; then
 
     bash miniconda.sh -b -p "$HOME/miniconda3"
     rm miniconda.sh
-
-    # Initialize for zsh
-    "$HOME/miniconda3/bin/conda" init zsh
 else
     echo "Miniconda already installed"
 fi
