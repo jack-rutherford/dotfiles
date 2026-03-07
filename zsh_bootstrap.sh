@@ -156,13 +156,34 @@ brew install --cask font-caskaydia-cove-nerd-font
 
 # Create repos directory for oprj/oprjt functions
 mkdir -p "$HOME/repos"
+cp .zshrc "$HOME/.zshrc"
 
-mv .zshrc "$HOME/.zshrc"
-mv swft-vscode/ "$HOME/.vscode/extensions/"
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+VSCODE_EXTENSIONS=$(cat swft-vscode/package.json | jq .extensionPack | sed -e "s:\[:\(:" -e "s:\]:\):" -e "s:,::g")
+FAILED_EXTENSIONS=()
+for ext in "${VSCODE_EXTENSIONS[@]}"; do
+    if code --install-extension "$ext" --force &>/dev/null; then
+        echo "  ✓ $ext"
+    else
+        echo "  ✗ $ext (failed)"
+        FAILED_EXTENSIONS+=("$ext")
+    fi
+done
+
+if [[ ${#FAILED_EXTENSIONS[@]} -gt 0 ]]; then
+    echo ""
+    echo "⚠️  The following extensions failed to install (may be renamed/removed from Marketplace):"
+    for f in "${FAILED_EXTENSIONS[@]}"; do
+        echo "     - $f"
+    done
+else
+    echo "All VS Code extensions installed successfully."
+fi
 
 # Replace hardcoded paths in vscode settings and move to correct location
 sed -i '' "s|/Users/jruth/|$HOME/|g" vscode_settings.json
-mv vscode_settings.json "$HOME/Library/Application Support/Code/User/settings.json"
+cp vscode_settings.json "$HOME/Library/Application Support/Code/User/settings.json"
 
 source "$HOME/.zshrc"
 
@@ -175,6 +196,7 @@ echo "2. Configure AWS CLI with 'aws configure sso' if you use AWS"
 echo "3. Configure kubectl contexts for Kubernetes access"
 echo "4. Copy your .zshrc to ~/.zshrc (if not already done)"
 echo "5. Restart your terminal or run: source ~/.zshrc"
+echo "6. Add "Code" to your path in VSCode (ctl + shift + p > install code to path)"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 echo "Bootstrap installation complete!"
