@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+git
+read -p "⚠️  Press enter to continue once git has finished installing."
+
 echo "Starting bootstrap installation..."
 
 OS="$(uname -s)"
@@ -185,6 +188,8 @@ fi
 sed -i '' "s|/Users/jruth/|$HOME/|g" vscode_settings.json
 cp vscode_settings.json "$HOME/Library/Application Support/Code/User/settings.json"
 
+source ~/miniconda3/bin/activate
+conda deactivate
 source "$HOME/.zshrc"
 
 # AWS SSO setup reminder
