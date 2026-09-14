@@ -19,7 +19,7 @@ chmod +x bootstrap.sh
 - **pipx** - Isolated Python CLI tool manager
 
 ### Shell Enhancements
-- **oh-my-posh** - Shell prompt customization
+- **oh-my-zsh** - Shell prompt customization
 - **zsh-autosuggestions** - Fish-like autosuggestions for zsh
 - **zsh-syntax-highlighting** - Syntax highlighting in zsh
 - **fzf** - Fuzzy finder for command-line
