@@ -42,9 +42,20 @@ brew install kubecolor
 brew install kubectl
 brew install terraform
 brew install awscli
-brew install jandedobbeleer/oh-my-posh/oh-my-posh
 brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting
+
+# Install zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Install catppuccin theme for oh-my-zsh
+git clone https://github.com/JannoTjarks/catppuccin-zsh.git
+mkdir ~/.oh-my-zsh/themes/catppuccin-flavors
+
+cp catppuccin-zsh/catppuccin.zsh-theme ~/.oh-my-zsh/themes/
+cp catppuccin-zsh/catppuccin-flavors/* ~/.oh-my-zsh/themes/catppuccin-flavors
+
+rm -rf catppuccin-zsh
 
 echo "Installing pyenv..."
 if [[ ! -d "$HOME/.pyenv" ]]; then
@@ -54,8 +65,11 @@ if [[ ! -d "$HOME/.pyenv" ]]; then
     if [[ "$MACHINE" == "Mac" ]]; then
         brew install openssl readline sqlite3 xz zlib
     elif [[ "$MACHINE" == "Linux" ]]; then
+        # sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
         echo "Note: You may need to install Python build dependencies manually on Linux"
         echo "For Ubuntu/Debian: sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev"
+        echo "Install build tools and then re-run the bootstrap script"
+        exit 0
     fi
 else
     echo "pyenv already installed"
@@ -82,15 +96,6 @@ if ! command -v code &> /dev/null; then
 else
     echo "VS Code already installed"
 fi
-
-echo "Setting up oh-my-posh theme directory..."
-mkdir -p "$HOME/.oh-my-posh/themes"
-
-# Download a default oh-my-posh theme (you'll need to add your custom kushal.omp.json)
-DEST="$HOME/.oh-my-posh/themes/kushal.omp.json"
-
-[ -f "$DEST" ] || \
-curl -sL https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/main/themes/kushal.omp.json -o "$DEST"
 
 # Create local bin directory
 mkdir -p "$HOME/.local/bin"
